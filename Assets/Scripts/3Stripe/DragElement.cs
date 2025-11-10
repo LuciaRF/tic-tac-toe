@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class DragElement : MonoBehaviour
 {
     private Vector3 offset;
+    
 
     private void OnMouseDown()
     {
@@ -19,5 +21,15 @@ public class DragElement : MonoBehaviour
         Vector2 mousePos = Input.mousePosition;
         float distance = Camera.main.WorldToScreenPoint(transform.position).z;
         transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, distance)) + offset;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Border"))
+        {
+            Debug.Log("OnTriggerEnter");
+            gameObject.GetComponent<DragElement>().enabled = false;
+            transform.position = other.GetComponent<PlayerOnCenter>()._centerPosition;
+        }
     }
 }

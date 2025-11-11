@@ -28,8 +28,8 @@ public class DragElement : MonoBehaviour
         if (other.CompareTag("Border"))
         {
             Debug.Log("OnTriggerEnter");
-            gameObject.GetComponent<DragElement>().enabled = false;
             transform.position = other.GetComponent<PlayerOnCenter>()._centerPosition;
+            gameObject.GetComponent<DragElement>().enabled = false;
         }
     }
 }
